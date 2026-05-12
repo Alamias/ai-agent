@@ -38,14 +38,14 @@ def get_files_info(working_directory, directory="."):
         if not os.path.isdir(target_dir):
             return f'Error: "{directory}" is not a directory'
 
-        lines = []
-        for name in sorted(os.listdir(target_dir)):
-            full_path = os.path.join(target_dir, name)
-            stat_result = os.stat(full_path)
-            size = stat_result.st_size
-            is_dir = os.path.isdir(full_path)
-            lines.append(f"- {name}: file_size={size} bytes, is_dir={is_dir}")
-
-        return "\n".join(lines)
+        files_info = []
+        for filename in os.listdir(target_dir):
+            filepath = os.path.join(target_dir, filename)
+            is_dir = os.path.isdir(filepath)
+            file_size = os.path.getsize(filepath)
+            files_info.append(
+                f"- {filename}: file_size={file_size} bytes, is_dir={is_dir}"
+            )
+        return "\n".join(files_info)
     except Exception as e:
-        return f"Error: {e}"
+        return f"Error listing files: {e}"
