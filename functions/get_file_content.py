@@ -2,10 +2,11 @@ import os
 
 from google.genai import types
 
-MAX_CHARS = 10000
-
+from config import MAX_CHARS
 
 def get_file_content(working_directory, file_path):
+    print("DEBUG working_directory:", working_directory)
+    print("DEBUG file_path:", file_path)    
     try:
         abs_working_dir = os.path.abspath(working_directory)
         abs_file_path = os.path.normpath(os.path.join(abs_working_dir, file_path))
